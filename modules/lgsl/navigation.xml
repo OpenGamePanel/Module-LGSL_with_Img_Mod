@@ -1,0 +1,6 @@
+<navigation>
+  <page key="lgsl" file="lgsl.php" access="admin,user,guest" />
+  <page key="lgsl_admin" file="lgsl_admin.php" access="admin" />
+  <page key="image" file="image.php" access="admin,user,guest" />
+  <page key="feed" file="feed.php" access="admin,user,guest" />
+</navigation>
