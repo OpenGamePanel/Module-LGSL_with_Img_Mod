@@ -62,7 +62,7 @@
       break;
 
       default: // "sa"
-        $link = $s ? "?m=lgsl&p=lgsl&s={$s}" : "?m=lgsl&p=lgsl";
+        $link = $s ? "?m=lgsl_with_img_mod&p=lgsl&s={$s}" : "?m=lgsl_with_img_mod&p=lgsl";
       break;
     }
 
@@ -459,7 +459,7 @@
     $map  = preg_replace("/[^a-z0-9_]/", "_", strtolower($map));
 	if ($check_exists !== TRUE) { return "protocol/lgsl/maps/{$type}/{$game}/{$map}.jpg"; }
 	if ($status) return get_map_path($type,$game,$map);
-	else return "modules/lgsl/lgsl_files/other/map_no_response.jpg";
+	else return "modules/lgsl_with_img_mod/lgsl_files/other/map_no_response.jpg";
   }
 
 //------------------------------------------------------------------------------------------------------------+

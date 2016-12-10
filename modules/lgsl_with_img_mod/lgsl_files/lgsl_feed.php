@@ -42,7 +42,7 @@ if (function_exists('curl_init') && function_exists('curl_setopt') && function_e
 		curl_setopt($lgsl_curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($lgsl_curl, CURLOPT_SSL_VERIFYHOST, FALSE);
 	}
-	curl_setopt($lgsl_curl, CURLOPT_URL, "$index_link?m=lgsl&p=feed&type=cleared$request_string");
+	curl_setopt($lgsl_curl, CURLOPT_URL, "$index_link?m=lgsl_with_img_mod&p=feed&type=cleared$request_string");
 	
 	$http_reply = curl_exec($lgsl_curl);
 
@@ -66,7 +66,7 @@ elseif (function_exists('fsockopen'))
 	{
 		stream_set_timeout($lgsl_fp, 6, 0);
 		stream_set_blocking($lgsl_fp, TRUE);
-		$host = parse_url("$index_link?m=lgsl&p=feed&type=cleared$request_string");
+		$host = parse_url("$index_link?m=lgsl_with_img_mod&p=feed&type=cleared$request_string");
 		$http_send  = "GET {$host['path']}?{$host['query']} HTTP/1.0\r\n";
 		$http_send .= "Host: {$host['host']}\r\n";
 		$http_send .= "Port: {$host['port']}\r\n";

@@ -25,11 +25,11 @@
 function exec_ogp_module()
 {
 	echo "<h2>LGSL Admin</h2>";
-	require "modules/lgsl/lgsl_files/lgsl_config.php";
+	require "modules/lgsl_with_img_mod/lgsl_files/lgsl_config.php";
 	define("LGSL_ADMIN", TRUE);
 	global $output;
 	$output = "";
-	require "modules/lgsl/lgsl_files/lgsl_admin.php";
+	require "modules/lgsl_with_img_mod/lgsl_files/lgsl_admin.php";
 	echo $output;
 }
 ?>

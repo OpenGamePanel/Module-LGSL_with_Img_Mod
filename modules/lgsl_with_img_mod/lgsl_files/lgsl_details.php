@@ -207,48 +207,48 @@
     <table cellpadding='4' cellspacing='2' style='margin:auto'>
       <tr style='".lgsl_bg(TRUE)."' align='center'>
         <td><b>Banner</b></td>
-        <td><img src='index.php?m=lgsl&p=image&type=cleared&s=".$_GET['s']."'/></td>
+        <td><img src='index.php?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."'/></td>
       </tr>";
 	
 	$output .= "
       <tr style='".lgsl_bg(FALSE)."' align='center'>
         <td><b>Codes</b></td>
         <td>
-			<input type='text' readonly='readonly' size='55' onclick='select()' value='[url=".$index_link."?m=lgsl&p=lgsl&s=".$_GET['s']."][img]".$index_link."?m=lgsl&p=image&type=cleared&s=".$_GET['s']."[/img][/url]' /><br />
-		    <input type='text' readonly='readonly' size='55' onclick='select()' value='[url=\"".$index_link."?m=lgsl&p=lgsl&s=".$_GET['s']."\"][img]".$index_link."?m=lgsl&p=image&type=cleared&s=".$_GET['s']."[/img][/url]' /><br />
-			<input type='text' readonly='readonly' size='55' onclick='select()' value='<a href=\"".$index_link."?m=lgsl&p=lgsl&s=".$_GET['s']."\" target=\"_blank\" ><img src=\"".$index_link."?m=lgsl&p=image&type=cleared&s=".$_GET['s']."\" /></a>' />
+			<input type='text' readonly='readonly' size='55' onclick='select()' value='[url=".$index_link."?m=lgsl_with_img_mod&p=lgsl&s=".$_GET['s']."][img]".$index_link."?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."[/img][/url]' /><br />
+		    <input type='text' readonly='readonly' size='55' onclick='select()' value='[url=\"".$index_link."?m=lgsl_with_img_mod&p=lgsl&s=".$_GET['s']."\"][img]".$index_link."?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."[/img][/url]' /><br />
+			<input type='text' readonly='readonly' size='55' onclick='select()' value='<a href=\"".$index_link."?m=lgsl_with_img_mod&p=lgsl&s=".$_GET['s']."\" target=\"_blank\" ><img src=\"".$index_link."?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."\" /></a>' />
 		</td>
       </tr>";
 	  
 	$output .= "
       <tr style='".lgsl_bg(TRUE)."' align='center'>
         <td><b>Banner</b></td>
-        <td><img src='index.php?m=lgsl&p=image&type=cleared&s=".$_GET['s']."&img_type=small'/></td>
+        <td><img src='index.php?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."&img_type=small'/></td>
       </tr>";
 	  
 	$output .= "
       <tr style='".lgsl_bg(FALSE)."' align='center'>
        <td><b>Codes</b></td>
         <td>
-			<input type='text' readonly='readonly' size='55' onclick='select()' value='[url=".$index_link."?m=lgsl&p=lgsl&s=".$_GET['s']."][img]".$index_link."?m=lgsl&p=image&type=cleared&s=".$_GET['s']."&img_type=small[/img][/url]' /><br />
-		    <input type='text' readonly='readonly' size='55' onclick='select()' value='[url=\"".$index_link."?m=lgsl&p=lgsl&s=".$_GET['s']."\"][img]".$index_link."?m=lgsl&p=image&type=cleared&s=".$_GET['s']."&img_type=small[/img][/url]' /><br />
-			<input type='text' readonly='readonly' size='55' onclick='select()' value='<a href=\"".$index_link."?m=lgsl&p=lgsl&s=".$_GET['s']."\" target=\"_blank\" ><img src=\"".$index_link."?m=lgsl&p=image&type=cleared&s=".$_GET['s']."&img_type=small\" /></a>' />
+			<input type='text' readonly='readonly' size='55' onclick='select()' value='[url=".$index_link."?m=lgsl_with_img_mod&p=lgsl&s=".$_GET['s']."][img]".$index_link."?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."&img_type=small[/img][/url]' /><br />
+		    <input type='text' readonly='readonly' size='55' onclick='select()' value='[url=\"".$index_link."?m=lgsl_with_img_mod&p=lgsl&s=".$_GET['s']."\"][img]".$index_link."?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."&img_type=small[/img][/url]' /><br />
+			<input type='text' readonly='readonly' size='55' onclick='select()' value='<a href=\"".$index_link."?m=lgsl_with_img_mod&p=lgsl&s=".$_GET['s']."\" target=\"_blank\" ><img src=\"".$index_link."?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."&img_type=small\" /></a>' />
 	   </td>  
 	  </tr>";
 	  
 	$output .= "
       <tr style='".lgsl_bg(TRUE)."' align='center'>
         <td><b>Banner</b></td>
-        <td><img src='index.php?m=lgsl&p=image&type=cleared&s=".$_GET['s']."&img_type=sky'/></td>
+        <td><img src='index.php?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."&img_type=sky'/></td>
       </tr>";
 	  
 	$output .= "
       <tr style='".lgsl_bg(FALSE)."' align='center'>
 		<td><b>Codes</b></td>
         <td>
-			<input type='text' readonly='readonly' size='55' onclick='select()' value='[url=".$index_link."?m=lgsl&p=lgsl&s=".$_GET['s']."][img]".$index_link."?m=lgsl&p=image&type=cleared&s=".$_GET['s']."&img_type=sky[/img][/url]' /><br />
-		    <input type='text' readonly='readonly' size='55' onclick='select()' value='[url=\"".$index_link."?m=lgsl&p=lgsl&s=".$_GET['s']."\"][img]".$index_link."?m=lgsl&p=image&type=cleared&s=".$_GET['s']."&img_type=sky[/img][/url]' /><br />
-			<input type='text' readonly='readonly' size='55' onclick='select()' value='<a href=\"".$index_link."?m=lgsl&p=lgsl&s=".$_GET['s']."\" target=\"_blank\" ><img src=\"".$index_link."?m=lgsl&p=image&type=cleared&s=".$_GET['s']."&img_type=sky\" /></a>' />
+			<input type='text' readonly='readonly' size='55' onclick='select()' value='[url=".$index_link."?m=lgsl_with_img_mod&p=lgsl&s=".$_GET['s']."][img]".$index_link."?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."&img_type=sky[/img][/url]' /><br />
+		    <input type='text' readonly='readonly' size='55' onclick='select()' value='[url=\"".$index_link."?m=lgsl_with_img_mod&p=lgsl&s=".$_GET['s']."\"][img]".$index_link."?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."&img_type=sky[/img][/url]' /><br />
+			<input type='text' readonly='readonly' size='55' onclick='select()' value='<a href=\"".$index_link."?m=lgsl_with_img_mod&p=lgsl&s=".$_GET['s']."\" target=\"_blank\" ><img src=\"".$index_link."?m=lgsl_with_img_mod&p=image&type=cleared&s=".$_GET['s']."&img_type=sky\" /></a>' />
 		</td>
       </tr>";
 	  

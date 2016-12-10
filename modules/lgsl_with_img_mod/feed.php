@@ -11,7 +11,7 @@
 function exec_ogp_module()
 {
 	//------------------------------------------------------------------------------------------------------------+
-	require "modules/lgsl/lgsl_files/lgsl_class.php";
+	require "modules/lgsl_with_img_mod/lgsl_files/lgsl_class.php";
 	//------------------------------------------------------------------------------------------------------------+
 	$type    = isset($_GET['lgsl_type'])? lgsl_string_html($_GET['lgsl_type']): "";
 	$ip      = isset($_GET['ip'])       ? lgsl_string_html($_GET['ip'])       : "";

@@ -87,9 +87,9 @@ function lgsl_lookup_ip($ip, $port)
 function error_img($msg, $id, $type)
 {
 	if(empty($type)) { $type = "normal"; }
-	$bgimg = "modules/lgsl/lgsl_files/image/default_{$type}.png";
+	$bgimg = "modules/lgsl_with_img_mod/lgsl_files/image/default_{$type}.png";
 	if (!file_exists($bgimg)) {
-		$bgimg = "modules/lgsl/lgsl_files/image/default.png";
+		$bgimg = "modules/lgsl_with_img_mod/lgsl_files/image/default.png";
 	}
 	
 	$im = imagecreatefrompng($bgimg);
@@ -105,7 +105,7 @@ function error_img($msg, $id, $type)
 			imagestring($im,5,2,10,$msg,$text_color);
 		break;
 		case "sky":
-			$misc['image_map'] = "modules/lgsl/lgsl_files/other/map_no_response.jpg";
+			$misc['image_map'] = "modules/lgsl_with_img_mod/lgsl_files/other/map_no_response.jpg";
 			$im_map_info = getimagesize($misc['image_map']);
 			$im_map = imagecreatefromjpeg($misc['image_map']);
 			$im_map_width  = 130;
@@ -170,7 +170,7 @@ $name_type_vertical = false; // false/true // Global default/fallback for printi
 //------------------------------------------------------------------------------------------------------------+
 // GET THE LGSL CORE
 
-require_once "modules/lgsl/lgsl_files/lgsl_class.php";
+require_once "modules/lgsl_with_img_mod/lgsl_files/lgsl_class.php";
 
 function exec_ogp_module()
 {
@@ -230,10 +230,10 @@ function exec_ogp_module()
 		   $bgimg = "{$server['b']['type']}/{$server['s']['game']}";
 		}
 
-	$bgimg = "modules/lgsl/lgsl_files/image/{$bgimg}_{$type}.png";
+	$bgimg = "modules/lgsl_with_img_mod/lgsl_files/image/{$bgimg}_{$type}.png";
 
 	// IMAGE CACHE
-	$cache_file = "modules/lgsl/lgsl_files/image/cache/".$server['b']['ip']."_".$server['b']['c_port']."-".$type;
+	$cache_file = "modules/lgsl_with_img_mod/lgsl_files/image/cache/".$server['b']['ip']."_".$server['b']['c_port']."-".$type;
 	$cache_time = lgsl_cache_info($lgsl_server_id);
 	$cache_time_expire = $cache_time[0];
 	$cache = array("file" => $cache_file, "cache_expire" => $cache_time_expire);
@@ -246,16 +246,16 @@ function exec_ogp_module()
 
 	// CHECK IF BACKGROUND IMAGE EXISTS, IF NOT USE DEFAULT
 	if (!file_exists($bgimg)) {
-		$bgimg = "modules/lgsl/lgsl_files/image/default_{$type}.png";
+		$bgimg = "modules/lgsl_with_img_mod/lgsl_files/image/default_{$type}.png";
 		if (!file_exists($bgimg)) {
-			$bgimg = "modules/lgsl/lgsl_files/image/default.png";
+			$bgimg = "modules/lgsl_with_img_mod/lgsl_files/image/default.png";
 			$type = "INVALID";
 		}
 	}
 	if($server['disabled'] == 1){
-		$bgimg = "modules/lgsl/lgsl_files/image/default_{$type}.png";
+		$bgimg = "modules/lgsl_with_img_mod/lgsl_files/image/default_{$type}.png";
 		if (!file_exists($bgimg)) {
-			$bgimg = "modules/lgsl/lgsl_files/image/default.png";
+			$bgimg = "modules/lgsl_with_img_mod/lgsl_files/image/default.png";
 			$type = "INVALID";
 		}
 	}
@@ -313,7 +313,7 @@ function exec_ogp_module()
 
 	// MAP
 	if($server['disabled'] == 1){
-	$misc['image_map'] = "modules/lgsl/lgsl_files/other/map_no_response.jpg";
+	$misc['image_map'] = "modules/lgsl_with_img_mod/lgsl_files/other/map_no_response.jpg";
 	}
 	$im_map_info = getimagesize($misc['image_map']);
 	if ($im_map_info[2] == 1) { $im_map = imagecreatefromgif($misc['image_map']);  }
@@ -328,11 +328,11 @@ function exec_ogp_module()
 		if ($im_icon_info[2] == 3) { $im_icon = imagecreatefrompng($misc['icon_game']);  }
 
 		// GEO IP (optional)
-		if (file_exists("modules/lgsl/lgsl_files/geoip.inc.php")){
+		if (file_exists("modules/lgsl_with_img_mod/lgsl_files/geoip.inc.php")){
 			$geoip = true;
-			require_once "modules/lgsl/lgsl_files/geoip.inc.php";
+			require_once "modules/lgsl_with_img_mod/lgsl_files/geoip.inc.php";
 			
-			$gi = geoip_open( "modules/lgsl/lgsl_files/GeoIP.dat", GEOIP_STANDARD );
+			$gi = geoip_open( "modules/lgsl_with_img_mod/lgsl_files/GeoIP.dat", GEOIP_STANDARD );
 			$clookup = geoip_country_code_by_addr($gi, $server['b']['ip']);
 			if (empty($clookup)){ $clookup = geoip_country_code_by_name($gi, $server['b']['ip']); }
 			$clookup = strtolower($clookup);
@@ -346,21 +346,21 @@ function exec_ogp_module()
 	//------------------------------------------------------------------------------------------------------------+
 	// TEXT COLOR & FORMATING. PLAY WITH IT!
 	// WE USE 2 FONTS HERE, FIRST IS FOR THE HEADING/SERVERNAME (UTF-8), SECOND IS FOR THE CONTENT SUCH AS CURRENT MAP
-	$text_font0 = "modules/lgsl/lgsl_files/image/_font/Cyberbas.ttf";
+	$text_font0 = "modules/lgsl_with_img_mod/lgsl_files/image/_font/Cyberbas.ttf";
 
 	$size0 = 10; //Normal
 	$size2 = 12; //Small
 	$size4 = 9; //Sky
 
-	$text_font1 = "modules/lgsl/lgsl_files/image/_font/Sansation_Regular.ttf";
+	$text_font1 = "modules/lgsl_with_img_mod/lgsl_files/image/_font/Sansation_Regular.ttf";
 
 	$size1 = 10; //Normal
 	$size3 = 10; //Small
 	$size5 = 9; //Sky
 		
 	// TEXT SETTINGS    	
-	if (file_exists("modules/lgsl/lgsl_files/image/color_settings.php")){
-		include_once "modules/lgsl/lgsl_files/image/color_settings.php";
+	if (file_exists("modules/lgsl_with_img_mod/lgsl_files/image/color_settings.php")){
+		include_once "modules/lgsl_with_img_mod/lgsl_files/image/color_settings.php";
 	}
 
 	// Fallback/default Textcolor
