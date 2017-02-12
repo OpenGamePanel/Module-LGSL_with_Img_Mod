@@ -308,12 +308,23 @@ function exec_ogp_module()
 
 	//------------------------------------------------------------------------------------------------------------+
 	// DEFINE CREATE IMAGE FROM IMAGE SOURCE
+	
+	// Set our options
+	stream_context_set_default(
+		array(
+			'http' => array(
+				'method' => 'GET',
+				'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0',
+				'header'=>'Referer: http://gametracker.com'
+			)
+		)
+	);
 
 	$im = imagecreatefrompng($bgimg);
 
 	// MAP
 	if($server['disabled'] == 1){
-	$misc['image_map'] = "modules/lgsl_with_img_mod/lgsl_files/other/map_no_response.jpg";
+		$misc['image_map'] = "modules/lgsl_with_img_mod/lgsl_files/other/map_no_response.jpg";
 	}
 	$im_map_info = getimagesize($misc['image_map']);
 	if ($im_map_info[2] == 1) { $im_map = imagecreatefromgif($misc['image_map']);  }
