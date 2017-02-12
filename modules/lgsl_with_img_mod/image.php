@@ -233,6 +233,7 @@ function exec_ogp_module()
 	$bgimg = "modules/lgsl_with_img_mod/lgsl_files/image/{$bgimg}_{$type}.png";
 
 	// IMAGE CACHE
+	$cache_dir_prefix = "modules/lgsl_with_img_mod/lgsl_files/image";
 	$cache_file = "modules/lgsl_with_img_mod/lgsl_files/image/cache/".$server['b']['ip']."_".$server['b']['c_port']."-".$type;
 	$cache_time = lgsl_cache_info($lgsl_server_id);
 	$cache_time_expire = $cache_time[0];
@@ -309,23 +310,28 @@ function exec_ogp_module()
 	//------------------------------------------------------------------------------------------------------------+
 	// DEFINE CREATE IMAGE FROM IMAGE SOURCE
 	
-	// Set our options
-	stream_context_set_default(
-		array(
-			'http' => array(
-				'method' => 'GET',
-				'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0',
-				'header'=>'Referer: http://gametracker.com'
-			)
-		)
-	);
-
 	$im = imagecreatefrompng($bgimg);
 
 	// MAP
 	if($server['disabled'] == 1){
 		$misc['image_map'] = "modules/lgsl_with_img_mod/lgsl_files/other/map_no_response.jpg";
 	}
+	
+	// Adjust image map:
+	if(cURLEnabled()){
+		$misc['image_map'] = curlCacheImage($cache_dir_prefix, $misc['image_map']); 
+	}else{
+		stream_context_set_default(
+			array(
+				'http' => array(
+					'method' => 'GET',
+					'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0',
+					'header'=>'Referer: http://gametracker.com'
+				)
+			)
+		);
+	}
+	
 	$im_map_info = getimagesize($misc['image_map']);
 	if ($im_map_info[2] == 1) { $im_map = imagecreatefromgif($misc['image_map']);  }
 	if ($im_map_info[2] == 2) { $im_map = imagecreatefromjpeg($misc['image_map']); }
