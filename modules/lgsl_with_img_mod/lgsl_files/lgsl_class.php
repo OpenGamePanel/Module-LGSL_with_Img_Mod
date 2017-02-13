@@ -457,7 +457,7 @@
     $type = preg_replace("/[^a-z0-9_]/", "_", strtolower($type));
     $game = preg_replace("/[^a-z0-9_]/", "_", strtolower($game));
     $map  = preg_replace("/[^a-z0-9_]/", "_", strtolower($map));
-	if ($check_exists !== TRUE) { return "protocol/lgsl/maps/{$type}/{$game}/{$map}.jpg"; }
+	if ($check_exists !== TRUE) { return "modules/lgsl_with_img_mod/lgsl_files/image/cache/{$map}.jpg"; }
 	if ($status) return get_map_path($type,$game,$map);
 	else return "modules/lgsl_with_img_mod/lgsl_files/other/map_no_response.jpg";
   }
