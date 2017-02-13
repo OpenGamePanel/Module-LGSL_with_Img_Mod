@@ -53,7 +53,7 @@
   $lgsl_config['host_to_ip']    = 0;         // 1=show the servers ip instead of its hostname
   $lgsl_config['public_add']    = 2;         // 1=servers require approval OR 2=servers shown instantly
   $lgsl_config['public_feed']   = 1;         // 1=feed requests can add new servers to your list
-  $lgsl_config['cache_time']    = 1;        // seconds=time before a server needs updating
+  $lgsl_config['cache_time']    = 10;        // seconds=time before a server needs updating
   $lgsl_config['live_time']     = 5;         // seconds=time allowed for updating servers per page load
   $lgsl_config['timeout']       = 0;         // 1=gives more time for servers to respond but adds loading delay
   $lgsl_config['retry_offline'] = 0;         // 1=repeats query when there is no response but adds loading delay
@@ -107,6 +107,46 @@
 		$lgsl_config['text']['asc'] = "CORRECTO - PORFAVOR CONFIRME EL SERVIDOR";
 		$lgsl_config['text']['aas'] = "Añadir Servidor";
 		$lgsl_config['text']['loc'] = "Hubicación:";
+	}
+	elseif( LANG == "French" )
+	{
+		// FRENCH
+		$lgsl_config['text']['vsd'] = "CLIQUER POUR VOIR LES DETAILS";
+		$lgsl_config['text']['slk'] = "REJOINDRE LE SERVEUR";
+		$lgsl_config['text']['sts'] = "Statut:";
+		$lgsl_config['text']['adr'] = "Adresse:";
+		$lgsl_config['text']['cpt'] = "Connection Port:";
+		$lgsl_config['text']['qpt'] = "Query Port:";
+		$lgsl_config['text']['typ'] = "Type:";
+		$lgsl_config['text']['gme'] = "Jeu:";
+		$lgsl_config['text']['map'] = "Carte:";
+		$lgsl_config['text']['plr'] = "Joueurs:";
+		$lgsl_config['text']['npi'] = "PAS D'INFO JOUEUR";
+		$lgsl_config['text']['nei'] = "PAS D'INFO EXTRA";
+		$lgsl_config['text']['ehs'] = "Paramètres";
+		$lgsl_config['text']['ehv'] = "Valeur";
+		$lgsl_config['text']['onl'] = "EN LIGNE";
+		$lgsl_config['text']['onp'] = "EN LIGNE AVEC MOT DE PASSE";
+		$lgsl_config['text']['nrs'] = "PAS DE RÉPONSE";
+		$lgsl_config['text']['pen'] = "EN ATTENTE DE REQUÊTE";
+		$lgsl_config['text']['zpl'] = "JOUEURS:";
+		$lgsl_config['text']['mid'] = "ID SERVEUR INVALIDE";
+		$lgsl_config['text']['nnm'] = "--";
+		$lgsl_config['text']['nmp'] = "--";
+		$lgsl_config['text']['tns'] = "Serveurs:";
+		$lgsl_config['text']['tnp'] = "Joueurs:";
+		$lgsl_config['text']['tmp'] = "Joueurs Max:";
+		$lgsl_config['text']['asd'] = "AJOUT PUBLIQUE DE SERVEUR DÉSACTIVÉ";
+		$lgsl_config['text']['awm'] = "CETTE ZONE VOUS PERMET DE TESTER ET ENSUITE D'AJOUTER DES SERVEURS EN LIGNE À LA LISTE";
+		$lgsl_config['text']['ats'] = "Tester Serveur";
+		$lgsl_config['text']['aaa'] = "SERVEUR DÉJÀ AJOUTÉ EN ATTENTE D'APPROBATION D'UN ADMIN";
+		$lgsl_config['text']['aan'] = "SERVEUR DÉJÀ AJOUTÉ";
+		$lgsl_config['text']['anr'] = "PAS DE RÉPONSE - VEUILLEZ ÊTRE SÛR D'AJOUTER LES BONNES INFORMATIONS";
+		$lgsl_config['text']['ada'] = "SERVEUR AJOUTÉ POUR APPROBATION D'UN ADMIN";
+		$lgsl_config['text']['adn'] = "SERVEUR AJOUTÉ";
+		$lgsl_config['text']['asc'] = "RÉUSSI - VEUILLEZ CONFIRMER QU'IL S'AGIT DU BON SERVEUR";
+		$lgsl_config['text']['aas'] = "Ajouter un serveur";
+		$lgsl_config['text']['loc'] = "Localisation:";
 	}
 	else
 	{
