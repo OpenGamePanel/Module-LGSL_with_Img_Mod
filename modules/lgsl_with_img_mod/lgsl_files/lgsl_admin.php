@@ -61,7 +61,7 @@
     // CONVERT ADVANCED TO NORMAL DATA FORMAT
     if (!empty($_POST['lgsl_management']))
     {
-      $form_lines = explode("\r\n", trim($_POST['form_list']));
+      $form_lines = preg_split('/\r?\n|\r|(\\\r)?\\\n|\\\r/', $_POST['form_list']);
 
       foreach ($form_lines as $form_key => $form_line)
       {
