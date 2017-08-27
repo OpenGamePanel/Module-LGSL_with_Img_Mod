@@ -57,10 +57,7 @@
 
         if ($lgsl_config['locations'])
         {
-          $output .= "
-          <a href='".lgsl_location_link($server['o']['location'])."' style='text-decoration:none'>
-            <img alt='' src='{$misc['icon_location']}' title='{$misc['text_location']}' style='vertical-align:middle; border:none' />
-          </a>";
+          $output .= "<img alt='' src='{$misc['icon_location']}' title='{$misc['text_location']}' style='vertical-align:middle; border:none' />";
         }
 
         $output .= "
