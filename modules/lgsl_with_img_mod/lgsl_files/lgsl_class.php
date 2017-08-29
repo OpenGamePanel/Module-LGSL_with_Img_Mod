@@ -16,6 +16,10 @@
 //------------------------------------------------------------------------------------------------------------+
 //------------------------------------------------------------------------------------------------------------+
 
+    if (file_exists('modules/lgsl_with_img_mod/lgsl_files/geoip.inc.php')) {
+          include 'modules/lgsl_with_img_mod/lgsl_files/geoip.inc.php';
+    }
+
   function lgsl_bg($rotation_overide = "no")
   {
     global $lgsl_config;
@@ -392,7 +396,6 @@
     $misc['text_location']      = lgsl_text_location($server['o']['location']);
     $misc['name_filtered']      = lgsl_string_html($server['s']['name'], FALSE, 20); // LEGACY
     $misc['software_link']      = lgsl_software_link($server['b']['type'], $server['b']['ip'], $server['b']['c_port'], $server['b']['q_port'], $server['b']['s_port']);
-    $misc['location_link']      = lgsl_location_link($server['o']['location']);
 
     return $misc;
   }
@@ -778,54 +781,18 @@
 
 //------------------------------------------------------------------------------------------------------------+
 
-  function lgsl_location_link($location)
-  {
-    if (!$location) { return "#"; }
-
-    if (strlen($location) == 2) { return "http://www.wipmania.com/map/{$location}"; }
-
-    return "http://www.google.com/search?q=".urlencode($location);
-  }
-
-//------------------------------------------------------------------------------------------------------------+
-
-  function lgsl_query_location($ip)
-  {
-    global $lgsl_config;
-
-    if ($lgsl_config['locations'] !== 1) { return $lgsl_config['locations']; }
-
-    $ip = gethostbyname($ip);
-
-    if (long2ip(ip2long($ip)) == "255.255.255.255") { return "XX"; }
-
-    $url = "http://api.wipmania.com/".urlencode($ip)."?".urlencode($_SERVER['HTTP_HOST']);
-
-    if (function_exists('curl_init') && function_exists('curl_setopt') && function_exists('curl_exec'))
-    {
-      $lgsl_curl = curl_init();
-
-      curl_setopt($lgsl_curl, CURLOPT_HEADER, 0);
-      curl_setopt($lgsl_curl, CURLOPT_TIMEOUT, 2);
-      curl_setopt($lgsl_curl, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($lgsl_curl, CURLOPT_CONNECTTIMEOUT, 2);
-      curl_setopt($lgsl_curl, CURLOPT_URL, $url);
-
-      $location = curl_exec($lgsl_curl);
-
-      if (curl_error($lgsl_curl)) { $location = "XX"; }
-
-      curl_close($lgsl_curl);
-    }
-    else
-    {
-      $location = @file_get_contents($url);
-    }
-
-    if (strlen($location) != 2) { $location = "XX"; }
-
-    return $location;
-  }
+	function lgsl_query_location($ip)
+      {
+		global $lgsl_config;
+		if ($lgsl_config['locations'] !== 1 || !function_exists('geoip_open')) {
+			return $lgsl_config['locations'];
+		}
+		
+		$gi = geoip_open('modules/lgsl_with_img_mod/lgsl_files/GeoIP.dat', GEOIP_STANDARD);
+		$ip = gethostbyname($ip);
+		
+		return strtolower(geoip_country_code_by_addr($gi, $ip));
+	}
 
 //------------------------------------------------------------------------------------------------------------+
 
