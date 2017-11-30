@@ -79,6 +79,9 @@ function pretty_text_ttf($im, $fontsize, $angle, $x, $y, $color, $font, $string,
 function lgsl_lookup_ip($ip, $port)
 {
 	global $db;
+	$ip = $db->realEscapeSingle($ip);
+	$port = $db->realEscapeSingle($port);
+	
 	$result = $db->resultQuery("SELECT `id` FROM `OGP_DB_PREFIXlgsl` WHERE `ip`='{$ip}' AND c_port='{$port}' LIMIT 1");
 	return $result[0];
 }
@@ -145,6 +148,7 @@ function make_img($im = false, $cache_on = false, $cache_data = false, $force_ca
 function lgsl_cache_info($id)
 {
 	global $db;	
+	$id = $db->realEscapeSingle($id);
 	$result = $db->resultQuery("SELECT `cache_time` FROM `OGP_DB_PREFIXlgsl` WHERE `id`='{$id}' LIMIT 1");
 	return empty($result[0]['cache_time']) ? array(0,0,0) : explode("_", $result[0]['cache_time']);
 }
