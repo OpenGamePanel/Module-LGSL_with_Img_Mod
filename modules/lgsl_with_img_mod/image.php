@@ -34,7 +34,7 @@
 
 function pretty_text($im, $fontsize, $x, $y, $string, $color, $outline = false)
 {
-	$black  = imagecolorallocate($bgImg, 0, 0, 0);
+	$black  = imagecolorallocate($im, 0, 0, 0);
 
 	// Black outline
 	if($outline){
@@ -56,7 +56,7 @@ function pretty_text($im, $fontsize, $x, $y, $string, $color, $outline = false)
 
 function pretty_text_ttf($im, $fontsize, $angle, $x, $y, $color, $font, $string, $outline = false)
 {
-	$black  = imagecolorallocate($bgImg, 0, 0, 0);
+	$black  = imagecolorallocate($im, 0, 0, 0);
 
 	// Black outline
 	if($outline){
@@ -178,7 +178,7 @@ require_once "modules/lgsl_with_img_mod/lgsl_files/lgsl_class.php";
 
 function exec_ogp_module()
 {
-	error_reporting(0);	  
+	error_reporting(0);
 	//------------------------------------------------------------------------------------------------------------+
 	// GET THE SERVER DETAILS AND PREPARE IT FOR DISPLAY
 	$s = cleaninput($_GET['s']);
@@ -208,7 +208,7 @@ function exec_ogp_module()
 
 	if($lookup){
 		$server = lgsl_query_cached("", "", "", "", "", "sep", $lgsl_server_id);
-		$fields = lgsl_sort_fields($server, $fields_show, $fields_hide, $fields_other);
+		$fields = lgsl_sort_fields($server, (array)$fields_show, (array)$fields_hide, (array)$fields_other);
 		$server = lgsl_sort_players($server);
 		$server = lgsl_sort_extras($server);
 		$misc   = lgsl_server_misc($server);
@@ -322,25 +322,17 @@ function exec_ogp_module()
 	}
 	
 	// Adjust image map:
-	if(cURLEnabled()){
+	if(cURLEnabled() && is_writable($cache_dir_prefix)){
 		$misc['image_map'] = curlCacheImage($cache_dir_prefix, $misc['image_map']); 
 	}else{
-		stream_context_set_default(
-			array(
-				'http' => array(
-					'method' => 'GET',
-					'user_agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:51.0) Gecko/20100101 Firefox/51.0',
-					'header'=>'Referer: http://gametracker.com'
-				)
-			)
-		);
+		$misc['image_map'] = "modules/lgsl_with_img_mod/lgsl_files/image/default.png";
 	}
 	
 	$im_map_info = getimagesize($misc['image_map']);
 	if ($im_map_info[2] == 1) { $im_map = imagecreatefromgif($misc['image_map']);  }
 	if ($im_map_info[2] == 2) { $im_map = imagecreatefromjpeg($misc['image_map']); }
 	if ($im_map_info[2] == 3) { $im_map = imagecreatefrompng($misc['image_map']);  }
-
+	
 	if($server['disabled'] == 0){
 		// GAMEICON
 		$im_icon_info = getimagesize($misc['icon_game']);
@@ -406,6 +398,11 @@ function exec_ogp_module()
 			break;
 		}
 	}
+	
+	if(!is_writable($cache_dir_prefix)) {
+		pretty_text_ttf($im_map,14,0,35,35,$text_color0,$text_font1,"E R R O R:", $txt_outline);
+		pretty_text_ttf($im_map,14,0,35,55,$text_color1,$text_font1,"C A C H E   F O L D E R   N O T   W R I T A B L E", $txt_outline);
+	}
 	 
 	//------------------------------------------------------------------------------------------------------------+   
 
@@ -414,7 +411,7 @@ function exec_ogp_module()
 
 	switch($type){
 		case "normal":
-			if ($geoip){ imagecopyresampled($im, $cimage, 245, 35, 0, 0, 16, 11, $cimage_info[0], $cimage_info[1]); } // Country  
+			if ($geoip && $cimage){ imagecopyresampled($im, $cimage, 245, 35, 0, 0, 16, 11, $cimage_info[0], $cimage_info[1]); } // Country  
 			pretty_text_ttf($im,$size4,0,2,15,$text_color1,$text_font0,substr($string0,0,60), $txt_outline); // Servername
 			pretty_text_ttf($im,$size4,0,65,45,$text_color0,$text_font1,$string1, $txt_outline); // IP:PORT
 			pretty_text_ttf($im,$size1,0,65,63,$text_color0,$text_font1,$string2, $txt_outline); // Map
@@ -423,7 +420,7 @@ function exec_ogp_module()
 		break;
 		
 		case "small":
-			if ($geoip){ imagecopyresampled($im, $cimage, 315, 1, 0, 0, 16, 11, $cimage_info[0], $cimage_info[1]); } // Country
+			if ($geoip && $cimage){ imagecopyresampled($im, $cimage, 315, 1, 0, 0, 16, 11, $cimage_info[0], $cimage_info[1]); } // Country
 			pretty_text_ttf($im,$size0,0,2,10,$text_color1,$text_font0,substr($string0,0,45), $txt_outline); // Servername
 			pretty_text_ttf($im,$size3,0,2,24,$text_color0,$text_font1,substr($string1,0,20), $txt_outline); // IP:Port
 			pretty_text_ttf($im,$size3,0,145,24,$text_color0,$text_font1,$string2, $txt_outline); // Map
@@ -443,10 +440,11 @@ function exec_ogp_module()
 			$im_icon_posx   = 16;
 			$im_icon_posy   = 127;
 
-			imagecopyresampled($im, $im_map, $im_map_posx, $im_map_posy, 0, 0, $im_map_width, $im_map_height, $im_map_info[0], $im_map_info[1]); // Mapimage
+			if($im_map)
+				imagecopyresampled($im, $im_map, $im_map_posx, $im_map_posy, 0, 0, $im_map_width, $im_map_height, $im_map_info[0], $im_map_info[1]); // Mapimage
 			if($server['disabled'] == 0){
 				imagecopyresampled($im, $im_icon, $im_icon_posx, $im_icon_posy, 0, 0, $im_icon_width, $im_icon_height, $im_icon_info[0], $im_icon_info[1]); // Gameicon
-				if ($geoip){ imagecopyresampled($im, $cimage, $im_icon_posx + 132, $im_icon_posy, 0, 0, 16, 11, $cimage_info[0], $cimage_info[1]); } // Country
+				if ($geoip && $cimage){ imagecopyresampled($im, $cimage, $im_icon_posx + 132, $im_icon_posy, 0, 0, 16, 11, $cimage_info[0], $cimage_info[1]); } // Country
 			}
 			if($name_type_vertical){ pretty_text_ttf($im,$size4,270,5,20,$text_color1,$text_font0,substr($string0,0,28), $txt_outline); } // Servername Vertical
 			else{ pretty_text_ttf($im,$size4,0,10,15,$text_color1,$text_font0,substr($string0,0,26), $txt_outline); } // Servername
